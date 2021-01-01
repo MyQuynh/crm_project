@@ -12,9 +12,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public abstract class CSVManager {
-    private String fileName;
+    protected String fileName;
 
-    public CSVManager(){}
+    public CSVManager(String filename){
+        this.fileName = filename;
+    }
 
     public static boolean contains(String[] stringArr, String key){
         for (int i = 0; i < stringArr.length; i++) {
@@ -144,6 +146,7 @@ public abstract class CSVManager {
     }
 
     public void showAllEntries() throws FileNotFoundException {
+        System.out.println("filename: " + this.fileName);
         Scanner fileScanner = new Scanner(new File(this.fileName));
         while (fileScanner.hasNext()) {
             String line = fileScanner.nextLine();

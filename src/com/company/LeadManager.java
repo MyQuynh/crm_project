@@ -6,12 +6,11 @@ import java.util.Scanner;
 
 public class LeadManager extends CSVManager {
 
-    private String fileName;
     private int latestId;
     private final DateManager dateManager;
 
     public LeadManager() throws IOException {
-        this.fileName = "leads.csv";
+        super("leads.csv");
         this.latestId = getLatestId();
         dateManager = new DateManager();
     }

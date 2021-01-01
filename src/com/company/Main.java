@@ -9,34 +9,9 @@ public class Main {
         LeadManager leadManager = new LeadManager();
         InteractionManager interactionManager = new InteractionManager();
 
-        // lead's functions
-        // add lead
-        leadManager.addEntryFromInput();
+        System.out.println("interaction filename: " + interactionManager.fileName);
 
-        // show all lead
-        leadManager.showAllEntries();
-
-        // update lead
-        leadManager.updateEntry();
-
-        // remove lead
-        leadManager.deleteEntry();
-        leadManager.showAllEntries();
-
-        // interaction's functions
-        // add interaction
         interactionManager.addEntryFromInput();
-
-        // show all interactions
         interactionManager.showAllEntries();
-
-        // update interaction
-        interactionManager.updateEntry();
-
-        // remove interaction
-        interactionManager.deleteEntry();
-        interactionManager.showAllEntries();
-
-        // report and statistic functions
     }
 }

@@ -6,12 +6,11 @@ import java.util.Scanner;
 
 public class InteractionManager extends CSVManager {
 
-    private String fileName;
     private int latestId;
     private final DateManager dateManager;
 
     public InteractionManager() throws IOException {
-        this.fileName = "interactions.csv";
+        super("interactions.csv");
         this.latestId = getLatestId();
         dateManager = new DateManager();
     }
