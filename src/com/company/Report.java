@@ -29,7 +29,7 @@ public class Report {
             String line = fileScanner.nextLine();
             String[] lineContent = line.split(",");
             Date date  = dateFormat.parse(lineContent[1]);
-            if (dateWithinRange(startDate, endDate, date){
+            if (dateWithinRange(startDate, endDate, date)){
                 if (lineContent[4].equals("positive")){
                     potential[0] += 1;
                 }
