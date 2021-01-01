@@ -29,6 +29,12 @@ public abstract class CSVManager {
         String lastLine = "";
         String currentLine = "";
         BufferedReader bufferedReader = new BufferedReader(new FileReader("leads.csv"));
+
+        // check for empty file
+        if (bufferedReader.readLine() == null){
+            return 0;
+        }
+
         while ((currentLine = bufferedReader.readLine()) != null) {
             // System.out.println(currentLine);
             lastLine = currentLine;

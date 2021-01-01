@@ -11,7 +11,7 @@ public class DateManager {
 
     public DateManager() {}
 
-    private void getDateFormatFromInput() {
+    private void setDateFormat() {
         Scanner inputScanner = new Scanner(System.in);
         int userChoice;
 
@@ -30,21 +30,23 @@ public class DateManager {
         } else {
             this.dateFormat = "yyyy/MM/dd";
         }
-
-        inputScanner.close();
     }
+
 
     public String getDateFromInput() throws ParseException {
         Scanner inputScanner = new Scanner(System.in);
-        String resultDate;
+        String resultDate = "";
 
-        do{
-            getDateFormatFromInput();
-            System.out.println("Please enter date according to format entered above.");
-            resultDate = inputScanner.next();
+        try {
+            do {
+                setDateFormat();
+                System.out.println("Please enter date according to format entered above.");
+                resultDate = inputScanner.next();
+            }
+            while (!isCorrectDateFormat(resultDate) || resultDate == null);
+        }catch (ParseException e){
+            System.out.println("Incorrect date format, please try again.");
         }
-        while(isCorrectDateFormat(resultDate) || resultDate == null);
-
         return resultDate;
     }
 
@@ -52,15 +54,13 @@ public class DateManager {
         Date formattedDate = null;
         try {
             DateFormat dateFormat = new SimpleDateFormat(this.dateFormat);
+            dateFormat.setLenient(false);
             formattedDate = dateFormat.parse(date);
-            if (!date.equals(formattedDate.toString())){
-                return false;
-            }
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("Incorrect date format. Please try again.");
+            return false;
         }
-
-        return date != null;
+        return true;
     }
 
     public boolean isInRange(String start, String end, String dateString) throws ParseException {

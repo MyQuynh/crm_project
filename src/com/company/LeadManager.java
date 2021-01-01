@@ -23,24 +23,25 @@ public class LeadManager extends CSVManager {
 
         String[] allowedCommunicationMethod = new String[]{"email", "phone"};
         String[] allowedResult = new String[]{"neutral", "positive", "negative"};
+        String[] allowedGender = new String[]{"true", "false"};
 
-        String leadId = "inter_" + this.latestId;
+        String leadId = "lead_" + this.latestId;
         this.latestId += 1;
 
         do {
             System.out.println("Enter lead's name: ");
-            leadName = dateManager.getDateFromInput();
+            leadName = inputScanner.next();
         } while (leadName.isBlank());
 
         do {
             System.out.println("Enter lead's dob: ");
             leadDob = dateManager.getDateFromInput();
-        } while (leadDob.isBlank() || dateManager.isCorrectDateFormat(leadDob));
+        } while (leadDob.isBlank() || !dateManager.isCorrectDateFormat(leadDob));
 
         do {
             System.out.println("Enter lead's gender: ");
             leadGender = inputScanner.next();
-        } while (leadGender.isBlank());
+        } while (leadGender.isBlank() || !contains(allowedGender, leadGender));
 
         do {
             System.out.println("Enter lead's phone number: ");
@@ -50,7 +51,7 @@ public class LeadManager extends CSVManager {
         do {
             System.out.println("Enter lead's email: ");
             leadMail = inputScanner.next();
-        } while (leadMail.isBlank());
+        } while (leadMail.isBlank() || !leadMail.contains("@"));
 
         do {
             System.out.println("Enter lead's address: ");

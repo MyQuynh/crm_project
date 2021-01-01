@@ -30,7 +30,7 @@ public class InteractionManager extends CSVManager {
         do {
             System.out.println("Enter interaction's date: ");
             interactionDate = dateManager.getDateFromInput();
-        } while (interactionDate.isBlank());
+        } while (interactionDate.isBlank() || !dateManager.isCorrectDateFormat(interactionDate));
 
         do {
             System.out.println("Enter interaction's lead's id: ");
