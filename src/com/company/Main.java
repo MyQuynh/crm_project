@@ -11,7 +11,7 @@ public class Main {
 
         System.out.println("interaction filename: " + interactionManager.fileName);
 
-        interactionManager.addEntryFromInput();
+        interactionManager.addEntry();
         interactionManager.showAllEntries();
     }
 }

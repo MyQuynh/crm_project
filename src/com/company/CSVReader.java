@@ -7,14 +7,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public abstract class CSVManager {
+public class CSVReader {
     protected String fileName;
 
-    public CSVManager(String filename){
+    public CSVReader(String filename){
         this.fileName = filename;
     }
 
@@ -38,42 +37,12 @@ public abstract class CSVManager {
         }
 
         while ((currentLine = bufferedReader.readLine()) != null) {
-            // System.out.println(currentLine);
             lastLine = currentLine;
         }
         String id = lastLine.split(",")[0];
 
         bufferedReader.close();
         return Integer.parseInt(id.substring(id.length() - 3));
-    }
-
-    public abstract String addEntryFromInput() throws ParseException;
-
-    public void updateEntry() throws IOException, ParseException {
-        File temp = new File("temp.csv");
-        File currentFile = new File(this.fileName);
-        PrintWriter tempWriter = new PrintWriter(new FileWriter(temp, true));
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the id of the entry to be updated: ");
-        String id = scanner.next();
-
-        Scanner fileScanner = new Scanner(currentFile);
-        while (fileScanner.hasNext()) {
-            String line = fileScanner.nextLine();
-            if (!line.split(",")[0].equals(id)) {
-                tempWriter.println(line);
-            } else {
-                String newEntryInfo = addEntryFromInput();
-                tempWriter.println(line.split(", ")[0] + ", " + newEntryInfo);
-            }
-        }
-        tempWriter.close();
-
-        // delete current file
-        if (currentFile.delete() && temp.renameTo(currentFile)) {
-            System.out.println("entry updated");
-        }
     }
 
     public void deleteEntry() throws IOException {
@@ -101,26 +70,6 @@ public abstract class CSVManager {
 
         scanner.close();
         fileScanner.close();
-    }
-
-    public void addEntry() throws IOException {
-        // TODO: add date from string
-
-        int latestId = getLatestId();
-        String id = "lead_" + Integer.toString(latestId);
-        System.out.println("latest id: " + id);
-
-        // write input to file
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter("leads.csv", true));
-
-            String newLeadInfo = addEntryFromInput();
-            pw.println(id + ", " + newLeadInfo);
-
-            pw.close();
-        } catch (IOException | ParseException ioException) {
-            System.err.println(ioException.getMessage());
-        }
     }
 
     public void showEntry() throws IOException {

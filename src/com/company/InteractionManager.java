@@ -1,10 +1,10 @@
 package com.company;
 
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class InteractionManager extends CSVManager {
+public class InteractionManager extends CSVReader implements CSVWriter {
 
     private int latestId;
     private final DateManager dateManager;
@@ -15,8 +15,7 @@ public class InteractionManager extends CSVManager {
         dateManager = new DateManager();
     }
 
-    @Override
-    public String addEntryFromInput() throws ParseException {
+    public void addEntry() throws ParseException {
         Scanner inputScanner = new Scanner(System.in);
         String interactionDate, leadId, communicationMethod, result;
 
@@ -46,6 +45,47 @@ public class InteractionManager extends CSVManager {
             result = inputScanner.next();
         } while (result.isBlank() || !contains(allowedResult, result));
 
-        return String.join(",", inter_id, interactionDate, leadId, communicationMethod, result);
+        String newLine = String.join(",", inter_id, interactionDate, leadId, communicationMethod, result);
+        try (
+                FileWriter fileWriter = new FileWriter(this.fileName);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        ) {
+            bufferedWriter.write(newLine);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    public void updateEntry() throws FileNotFoundException, ParseException {
+        File temp = new File("temp.csv");
+        File currentFile = new File(this.fileName);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the id of the entry to be updated: ");
+        String id = scanner.next();
+
+        Scanner fileScanner = new Scanner(currentFile);
+
+        while (fileScanner.hasNext()) {
+            String line = fileScanner.nextLine();
+            if (!line.split(",")[0].equals(id)) {
+                try (
+                        FileWriter fileWriter = new FileWriter(this.fileName);
+                        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                ) {
+                    addEntry();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            } else {
+                System.out.println("There's no matching entry with matching id.");
+            }
+
+            // delete current file
+            if (currentFile.delete() && temp.renameTo(currentFile)) {
+                System.out.println("entry updated");
+
+            }
+        }
     }
 }

@@ -1,10 +1,12 @@
 package com.company;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class LeadManager extends CSVManager {
+public class LeadManager extends CSVReader implements CSVWriter {
 
     private int latestId;
     private final DateManager dateManager;
@@ -15,8 +17,7 @@ public class LeadManager extends CSVManager {
         dateManager = new DateManager();
     }
 
-    @Override
-    public String addEntryFromInput() throws ParseException {
+    public void addEntry() throws ParseException {
         Scanner inputScanner = new Scanner(System.in);
         String leadName, leadDob, leadGender, leadPhone, leadMail, leadAddress;
 
@@ -57,6 +58,14 @@ public class LeadManager extends CSVManager {
             leadAddress = inputScanner.next();
         } while (leadAddress.isBlank());
 
-        return String.join(",", leadId, leadName, leadDob, leadGender, leadPhone, leadMail, leadAddress);
+        String newLine = String.join(",", leadId, leadName, leadDob, leadGender, leadPhone, leadMail, leadAddress);
+        try (
+                FileWriter fileWriter = new FileWriter(this.fileName);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        ) {
+            bufferedWriter.write(newLine);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 }
