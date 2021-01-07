@@ -10,7 +10,7 @@ public class LeadGenderInput {
 
             // Get the input from users, and lower case it
             System.out.print("Enter lead's gender which is true for male and false for female: ");
-            String gender = Main.scanner.next().toLowerCase();
+            String gender = Main.scanner.nextLine().toLowerCase();
 
 
             // Check if the users enter the correct value which is true and false

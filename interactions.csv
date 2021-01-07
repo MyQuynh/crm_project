@@ -1,19 +1,2 @@
-inter_001,2000-05-05,lead_001,Email,positive
-inter_002,2001-06-05,lead_002,Telephone,neutral
-inter_003,2001-06-05,lead_003,Face to face,negative
-inter_004,2003-05-05,lead_004,Social media,positive
-inter_005,2005-04-05,lead_005,Email,neutral
-inter_006,2005-04-05,lead_006,Telephone,negative
-inter_007,2005-07-05,lead_007,Face to face,positive
-inter_008,2007-09-05,lead_008,Social media,neutral
-inter_009,2008-01-05,lead_009,Email,negative
-inter_010,2008-02-05,lead_010,Telephone,positive
-inter_011,2009-04-05,lead_011,Face to face,neutral
-inter_012,2015-06-05,lead_012,Social media,negative
-inter_013,2018-07-05,lead_013,Email,positive
-inter_014,2018-08-05,lead_014,Telephone,neutral
-inter_015,2019-08-05,lead_015,Face to face,negative
-lead_0, inter_0,08/03/2001,lead_001,email,positive
-lead_0, inter_0,08/03/2001,lead_001,email,positive
-lead_0, inter_0,08/03/2001,lead_001,email,positive
-lead_0, inter_0,08/03/2001,lead_001,email,positive
+lead_0, inter_0,08/03/2001,lead_001,email,negative
+lead_0, inter_0,08/03/2001,lead_001,email,negative

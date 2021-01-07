@@ -16,8 +16,8 @@ public class LeadAddressInput {
         while (true){
 
             // Get the input from users
-            System.out.print("Enter the address: ");
-            String address = Main.scanner.nextLine();
+            System.out.print("Enter the address:");
+            String address = Main.scanner.useDelimiter("\\s*").nextLine();
 
             // If it matches the below Pattern, stop the loop
             if(patternAddress.matcher(address).matches()){
@@ -42,7 +42,7 @@ public class LeadAddressInput {
         // Therefore, we will make all the address become lowercase and the changing the first index of Street Name to UpperCase
         StringBuffer bufferUpperCase = new StringBuffer();
         String[] words = finalAddress.split(" ");
-        bufferUpperCase.append(words[0]);
+        bufferUpperCase.append(words[0] + " ");
 
         // Start at one to ignore the number address
         for (int i = 1; i < words.length; i++) {
@@ -50,6 +50,8 @@ public class LeadAddressInput {
             // Get the first character, make it to upperCase and concat it with the remain String
             words[i] = words[i].substring(0,1).toUpperCase() + words[i].substring(1);
             bufferUpperCase.append(words[i]);
+            if(words.length == 1){break;}
+            bufferUpperCase.append(" ");
 
         }
 

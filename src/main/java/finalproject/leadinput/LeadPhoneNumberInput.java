@@ -16,7 +16,7 @@ public class LeadPhoneNumberInput {
 
             // Get the input from users
             System.out.print("Enter the lead's phone number: ");
-            String phoneNumber = Main.scanner.next();
+            String phoneNumber = Main.scanner.nextLine();
 
             // If it match the phone pattern given below stop the while - loop
             if (patternPhone.matcher(phoneNumber).matches()){

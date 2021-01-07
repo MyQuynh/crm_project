@@ -2,6 +2,9 @@ package finalproject.leadinput;
 
 import finalproject.Main;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LeadNameInput {
 
     public String toUpperCaseFirstLetter(String word){
@@ -17,31 +20,44 @@ public class LeadNameInput {
 
             // Get the input lead's input name from the user
             System.out.print("Please enter the lead's name: ");
-            String name = Main.scanner.next();
+            String name = Main.scanner.nextLine().toLowerCase();
 
             // If the name is empty, notify it and make user enter again
             if (name.equals("")){
-                System.out.print("The name cannot be empty");
+                System.out.println("The name cannot be empty");
                 System.out.println("Please try again");
             } else {
-                // Split the name by space and lowercase all of the name
-                String[] newNameArray = name.toLowerCase().split("");
+                // Check if the name contains characters
+                Pattern character = Pattern.compile("[a-z]*");
+                Matcher matcher = character.matcher(name);
 
-                // Creating the new value called newName to store later
-                StringBuffer newName = new StringBuffer();
-                // Looping through the array of newName and change the first letter to UpperCase
-                for (int i = 0; i < newNameArray.length; i++) {
+                if (matcher.matches()){
+                    // Split the name by space and lowercase all of the name
+                    String[] newNameArray = name.split(" ");
 
-                    // Call the function to upperCaseLetter
-                    newName.append(toUpperCaseFirstLetter(newNameArray[i]));
+                    // Creating the new value called newName to store later
+                    StringBuffer newName = new StringBuffer();
+                    // Looping through the array of newName and change the first letter to UpperCase
+                    for (int i = 0; i < newNameArray.length; i++) {
 
-                    // If not i not equal not length, not append space
-                    if (i == newName.length()){
-                        break;
+                        // Call the function to upperCaseLetter
+                        newName.append(toUpperCaseFirstLetter(newNameArray[i]));
+
+                        // If not i not equal not length, not append space
+                        if (i == newName.length()){
+                            break;
+                        }
+                        newName.append(" ");
                     }
-                    newName.append(" ");
+                    return newName.toString();
+
+                // If it contains any digits or special character, make the user enter again
+                } else {
+                    System.out.println("The lead's name should not contains any digits and special characters");
+                    System.out.println("Please try again");
                 }
-                return newName.toString();
+
+
 
             }
         }

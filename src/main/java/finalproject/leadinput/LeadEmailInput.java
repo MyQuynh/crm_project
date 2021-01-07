@@ -9,7 +9,7 @@ public class LeadEmailInput {
     public String leadEmailInput() {
         while (true) {
             // Get the input from users
-            System.out.print("Enter the lead's email: ");
+            System.out.print("Enter the lead's email:");
             String email = Main.scanner.nextLine();
 
             // Creat the valid Pattern email using RegEx

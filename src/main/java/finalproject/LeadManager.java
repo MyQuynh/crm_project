@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
-public class LeadManager extends CSVManager {
+public class LeadManager extends CSVManager implements Repeat {
 
     // List of all the components of the lead
     private String leadID;
@@ -170,7 +170,7 @@ public class LeadManager extends CSVManager {
 //            System.out.println("Enter lead's name: ");
 //            leadName = inputScanner.next();
 //        } while (leadName.isBlank());
-        System.out.println("Enter lead's name: ");
+        //System.out.println("Enter lead's name: ");
         //leadName = isValid.isValidName();
 
         // Get the input name from the user and check if it valid
@@ -233,6 +233,10 @@ public class LeadManager extends CSVManager {
         leadAddress = leadAddressInput.leadAddressInput();
         //leadAddress = isValid.isValidAddress();
 
+        if(repeat()){
+            addEntryFromInput();
+        }
+        System.out.println(leadId + leadName +leadDob +String.valueOf(leadGender) + leadPhone + leadMail + leadAddress);
         return String.join(",", leadId, leadName, leadDob, String.valueOf(leadGender), leadPhone, leadMail, leadAddress);
     }
 
