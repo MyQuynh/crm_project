@@ -6,6 +6,8 @@ public class LeadGenderInput {
 
     public boolean leadGenderInput(){
         String genderResult;
+
+        // Looping until the user gender input match the condition
         while(true){
 
             // Get the input from users, and lower case it
@@ -19,7 +21,7 @@ public class LeadGenderInput {
                 System.out.println("The input cannot be empty");
                 System.out.println("Please try again");
 
-                // If the users does not enter the correct given value (true or false), notify them and make the user enter again
+            // If the users does not enter the correct given value (true or false), notify them and make the user enter again
             } else if (!gender.equalsIgnoreCase("true") && !gender.equalsIgnoreCase("false")) {
                 System.out.println("The gender should be true for male and false for female");
                 System.out.println("Please try again");
@@ -29,6 +31,7 @@ public class LeadGenderInput {
             }
         }
 
+        // If it true, return boolean true, else false
         if(genderResult.equals("true")){
             return true;
         };

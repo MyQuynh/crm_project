@@ -16,7 +16,7 @@ public class LeadAddressInput {
         while (true){
 
             // Get the input from users
-            System.out.print("Enter the address:");
+            System.out.print("Enter the address: ");
             String address = Main.scanner.useDelimiter("\\s*").nextLine();
 
             // If it matches the below Pattern, stop the loop
@@ -50,7 +50,9 @@ public class LeadAddressInput {
             // Get the first character, make it to upperCase and concat it with the remain String
             words[i] = words[i].substring(0,1).toUpperCase() + words[i].substring(1);
             bufferUpperCase.append(words[i]);
-            if(words.length == 1){break;}
+            if( i == words.length - 1){
+                break;
+            }
             bufferUpperCase.append(" ");
 
         }

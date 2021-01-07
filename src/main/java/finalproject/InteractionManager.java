@@ -5,9 +5,7 @@ import finalproject.interactioninput.InteractionMethodInput;
 import finalproject.interactioninput.InteractionPotentialInput;
 import jdk.swing.interop.SwingInterOpUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
@@ -20,7 +18,6 @@ public class InteractionManager extends CSVManager {
     private String methods;
     private String potential;
 
-    private String fileName;
     private int latestId;
     private final DateManager dateManager = new DateManager();
 
@@ -35,7 +32,7 @@ public class InteractionManager extends CSVManager {
 
     public InteractionManager() throws IOException {
         super("interactions.csv");
-        this.latestId = getLatestId();
+        this.latestId = this.getLatestIdTest();
         //dateManager = new DateManager();
     }
 
@@ -79,15 +76,6 @@ public class InteractionManager extends CSVManager {
         this.potential = potential;
     }
 
-    @Override
-    public String getFileName() {
-        return fileName;
-    }
-
-    @Override
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 
     @Override
     public int getLatestId() {
@@ -126,6 +114,46 @@ public class InteractionManager extends CSVManager {
         System.out.println();
     }
 
+
+    @Override
+    public void addEntry() throws IOException {
+
+        Repeatable repeatable = new Repeatable();
+
+        do {
+
+            String interactionId = "inter_";
+            this.latestId += 1;
+
+            if (this.latestId >= 100) {
+                interactionId += this.latestId;
+            } else {
+                String prefix = Math.log(100) / Math.log(100 - this.latestId) >= 1 ? "0" : "00";
+                interactionId += prefix + this.latestId;
+            }
+
+            // write input to file
+            try {
+                PrintWriter pw = new PrintWriter(new FileWriter(this.fileName, true));
+
+                String newLeadInfo = this.addEntryFromInput();
+                pw.println(interactionId + "," + newLeadInfo);
+                System.out.println("Successfully adding the new interaction");
+                System.out.println("New interaction information: " + interactionId + "," + newLeadInfo);
+                System.out.println();
+
+                pw.close();
+            } catch (IOException | ParseException ioException) {
+                System.err.println(ioException.getMessage());
+            }
+
+        } while (repeatable.repeat());
+        System.out.println("Ending the adding section.");
+        System.out.println("Go back to the Interaction Menu....");
+        System.out.println();
+
+    }
+
     @Override
     public String addEntryFromInput() throws ParseException {
         Scanner inputScanner = new Scanner(System.in);
@@ -135,17 +163,18 @@ public class InteractionManager extends CSVManager {
         String[] allowedCommunicationMethod = new String[]{"email", "phone"};
         String[] allowedResult = new String[]{"neutral", "positive", "negative"};
 
-        String inter_id = "inter_" + this.latestId;
-        this.latestId += 1;
 
         do {
             System.out.println("Enter interaction's date: ");
             interactionDate = dateManager.getDateFromInput();
         } while (interactionDate.isBlank() || !dateManager.isCorrectDateFormat(interactionDate));
+        interactionDate = dateManager.convertDateFormat(interactionDate,"yyyy-MM-dd");
+        System.out.println();
 
         // Check if the leadID is exist, if does return the LeadID, if don't, make the user enter again
         InteractionLeadIDExistInput interactionLeadIDExistInput = new InteractionLeadIDExistInput();
         leadId = interactionLeadIDExistInput.leadIDExistInput();
+        System.out.println();
         //leadId = isValid.isExistLeadID();
 
 //        do {
@@ -154,6 +183,7 @@ public class InteractionManager extends CSVManager {
 //        } while (communicationMethod.isBlank() || !contains(allowedCommunicationMethod, communicationMethod));
         InteractionMethodInput interactionMethodInput = new InteractionMethodInput();
         communicationMethod = interactionMethodInput.interactionMethodInput();
+        System.out.println();
 
 //        do {
 //            System.out.println("Enter interaction's result: ");
@@ -161,7 +191,8 @@ public class InteractionManager extends CSVManager {
 //        } while (result.isBlank() || !contains(allowedResult, result));
         InteractionPotentialInput interactionPotentialInput = new InteractionPotentialInput();
         result = interactionPotentialInput.inputPotentialFromInteraction();
+        System.out.println();
 
-        return String.join(",", inter_id, interactionDate, leadId, communicationMethod, result);
+        return String.join(",", interactionDate, leadId, communicationMethod, result);
     }
 }

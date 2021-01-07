@@ -16,6 +16,7 @@ public class OptionCheck {
             try {
                 System.out.print("Please enter your option: ");
                 option = Main.scanner.nextInt();
+                Main.scanner.nextLine();
                 if (option < min || option > max) {
                     System.out.println("The option has to be between "+ min+" and "+max);
                     System.out.println("Please try again");

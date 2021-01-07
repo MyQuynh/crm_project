@@ -1,85 +1,85 @@
 package finalproject.reportandstatistic;
 
-import java.io.BufferedReader;
+import finalproject.DateManager;
+
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.BufferUnderflowException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.text.spi.DateFormatProvider;
-import java.util.Date;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PotentialInteract {
+    private String getDateFromLine(String line) {
+        // SPLIT LINE AND RETURN THE SECOND ELEMENT OF THE ARRAY (INTERACTION_DATE)
+        String[] lineContent = line.split(",");
+        return lineContent[1];
+    }
+    private String getResultFromLine(String line) {
+        // SPLIT LINE AND RETURN THE SECOND ELEMENT OF THE ARRAY (INTERACTION_RESULT)
+        String[] lineContent = line.split(",");
+        return lineContent[4];
+    }
 
-    public void PotentialInteract() throws ParseException, IOException {
+    public void getInteractionByPotential() throws ParseException, FileNotFoundException {
+        DateManager dateManager = new DateManager();
 
-        BufferedReader file = new BufferedReader(new FileReader("interactions.csv"));
-        String line;
-        Pattern p = Pattern.compile("(.+?),(.+?),(.+?),(.+?),(.+?)");
+        int negativeCount = 0;
+        int neutralCount = 0;
+        int positiveCount = 0;
 
-        // Check the option if it valid
+        // SET DATE FORMAT
+        String startDate, endDate, dateFormat;
+        String[] dateFormatList = new String[]{"MM/dd/yyyy", "dd/MM/yyyy", "yyyy/MM/dd"};
+        Scanner inputScanner = new Scanner(System.in);
         System.out.println("Please choose one of the option below");
-        System.out.println("1.MM-dd-yyyy");
-        System.out.println("2.dd-MM-yyyy");
-        System.out.println("3.yyyy-MM-dd");
-        Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-
-        SimpleDateFormat dob1 = new SimpleDateFormat("MM-dd-yyyy");
-        SimpleDateFormat dob2 = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat dob3 = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat inputFormatUser = new SimpleDateFormat();
-
-        SimpleDateFormat readDOB = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat printDOB = new SimpleDateFormat("MMM dd yyyy");
+        System.out.println("1.MM/dd/yyyy");
+        System.out.println("2.dd/MM/yyyy");
+        System.out.println("3.yyyy/MM/dd");
+        dateFormat = dateFormatList[inputScanner.nextInt()];
 
 
-        if (option == 1){
-            inputFormatUser = dob1;
-        } else if (option == 2){
-            inputFormatUser = dob2;
-        } else {
-            inputFormatUser = dob3;
+        // GET START AND END DATES, THEN CONVERT TO FORMAT USED IN CSV FILES
+        do {
+            System.out.println("Enter start date: ");
+            startDate = inputScanner.next();
+        } while (!dateManager.isCorrectDateFormat(startDate, dateFormat));
+        if (dateManager.isCorrectDateFormat(startDate, "yyyy/MM/dd")) {
+            startDate = dateManager.convertDateFormat(startDate, "yyyy/MM/dd");
         }
 
-        System.out.println("Please enter the start date");
-        String dateS = scanner.next();
-        Date dateStart = inputFormatUser.parse(dateS);
+        do {
+            System.out.println("Enter end date: ");
+            endDate = inputScanner.next();
+        } while (!dateManager.isCorrectDateFormat(endDate, dateFormat));
+        if (dateManager.isCorrectDateFormat(endDate, "yyyy/MM/dd")) {
+            endDate = dateManager.convertDateFormat(endDate, "yyyy/MM/dd");
+        }
 
-        System.out.println("Please enter the end date");
-        Date dateEnd = inputFormatUser.parse(scanner.next());
+        // SCAN THROUGH THE FILE LINE BY LINE AND LOOK FOR INTERACTION IN DATE RANGE
+        Scanner fileScanner = new Scanner(new File("interactions.csv"));
+        while(fileScanner.hasNext()){
+            String line = fileScanner.nextLine();
+            String interactionDate = getDateFromLine(line);
 
-        int count_neutral = 0;
-        int count_positive = 0;
-        int count_negative = 0;
-
-        while ((line = file.readLine()) != null){
-            Matcher m = p.matcher(line);
-            if (m.matches()){
-                Date dateFile = readDOB.parse(m.group(2));
-                if (dateFile.after(dateStart) && dateFile.before(dateEnd)){
-                    String potential = m.group(5);
-                    if (potential.equals("negative")){
-                        count_negative++;
-                    } else if (potential.equals("positive")){
-                        count_positive++;
-                    } else {
-                        count_neutral++;
-                    }
+            // COUNT INTERACTIONS BY RESULT
+            if (dateManager.isInRange(startDate, endDate, interactionDate)){
+                String result = getResultFromLine(line);
+                if (result.equals("negative")){
+                    negativeCount ++;
+                }
+                else if(result.equals("neutral")){
+                    neutralCount ++;
+                }
+                else{
+                    positiveCount ++;
                 }
             }
+
+            System.out.println("NUMBER OF INTERACTIONS BY POTENTIAL");
+            System.out.println("-----------------------------------");
+            System.out.println("Input: " + startDate + " - " + endDate);
+            System.out.println("| " + String.format("%1$18s", "Positive") + " | " + String.format("%1$18s", "Neutral") + " | " + String.format("%1$18s", "Negative") + " |");
+            System.out.println("| " + String.format("%1$18d", positiveCount) + " | " + String.format("%1$18d", neutralCount) + " | " + String.format("%1$18d", negativeCount) + " |");
+            System.out.println();
         }
-
-        System.out.println("NUMBER OF INTERACTIONS BY POTENTIAL");
-        System.out.println("-----------------------------------");
-        System.out.println("Input: " + printDOB.format(dateStart) + " - " + printDOB.format(dateEnd));
-        System.out.println("| " + String.format("%1$18s", "Positive") + " | " + String.format("%1$18s", "Neutral") + " | " + String.format("%1$18s", "Negative") + " |");
-        System.out.println("| " + String.format("%1$18d", count_positive) + " | " + String.format("%1$18d", count_neutral) + " | " + String.format("%1$18d", count_negative) + " |");
-        System.out.println();
-
     }
 }

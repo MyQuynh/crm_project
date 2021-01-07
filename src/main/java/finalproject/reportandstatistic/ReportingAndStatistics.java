@@ -1,5 +1,6 @@
 package finalproject.reportandstatistic;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -10,17 +11,21 @@ public class ReportingAndStatistics {
 
         try {
             LeadByAge led = new LeadByAge();
-            led.LeadByAge();
+            led.getDateByAge();
         } catch (ParseException | IOException e) {
-            System.out.println("Error");
+            System.out.println("Error occur");
         }
 
     }
 
     // Interaction potential
-    public void interactionPotential() throws IOException, ParseException {
+    public void interactionPotential() {
         PotentialInteract poi = new PotentialInteract();
-        poi.PotentialInteract();
+        try {
+            poi.getInteractionByPotential();
+        } catch (ParseException | FileNotFoundException e) {
+            System.out.println("Error occur");;
+        }
     }
 
     // Numbers of interaction

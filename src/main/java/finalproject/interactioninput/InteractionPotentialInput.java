@@ -12,7 +12,7 @@ public class InteractionPotentialInput {
 
             // Get the input from users and lower case it
             System.out.print("Please enter the potential of interaction (positive, negative, neutral): ");
-            String potential = Main.scanner.next().toLowerCase();
+            String potential = Main.scanner.nextLine().toLowerCase();
 
             // Check if it was empty
             // If does notify to the user and make the user enter again

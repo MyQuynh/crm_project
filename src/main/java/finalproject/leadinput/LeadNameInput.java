@@ -44,7 +44,7 @@ public class LeadNameInput {
                         newName.append(toUpperCaseFirstLetter(newNameArray[i]));
 
                         // If not i not equal not length, not append space
-                        if (i == newName.length()){
+                        if (i == newNameArray.length - 1){
                             break;
                         }
                         newName.append(" ");
@@ -56,8 +56,6 @@ public class LeadNameInput {
                     System.out.println("The lead's name should not contains any digits and special characters");
                     System.out.println("Please try again");
                 }
-
-
 
             }
         }

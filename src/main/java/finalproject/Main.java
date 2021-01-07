@@ -13,8 +13,19 @@ public class Main {
 
         // Call the main menu
         mainMenu();
-    }
+//        try {
+//            LeadManager leadManager = new LeadManager();
+//            System.out.println(leadManager.getLatestIdTest());
+//            System.out.println(leadManager.getFileName());;
+//
+//            InteractionManager interactionManager = new InteractionManager();
+//            System.out.println(interactionManager.getLatestIdTest());
+//            System.out.println(interactionManager.getFileName());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
+    }
 
     public static void mainMenu(){
 
@@ -76,6 +87,7 @@ public class Main {
 
                 // Check the option if it valid
                 int option = OptionCheck.optionCheck(1,6);
+                System.out.println();
 
                 // Depend on the option, the user can choose: see all the list of leads, adding lead, delete lead, update lead or return to the main menu
                 if (option == 1) {
@@ -87,25 +99,22 @@ public class Main {
 
                     // Call the function to show all the leads
                     leadManager.showEntry();
-                    //System.out.println("Choice two");
 
                 } else if (option == 3) {
 
                     // Call the function adding the Lead
-                    leadManager.addEntryFromInput();
-                    System.out.println("choice 3");
+                    leadManager.addEntry();
 
                 } else if (option == 4) {
 
                     // Call the function delete the lead
                     leadManager.deleteEntry();
-                    System.out.println("Choice 4");
 
                 } else if (option == 5) {
 
                     // Call the function updating the lead
                     leadManager.updateEntry();
-                    System.out.println("Choice five");
+
                 } else {
 
                     // Return to the main menu
@@ -127,17 +136,19 @@ public class Main {
                 // Display the menu bar of Interactions
                 System.out.println("---------------INTER_MENU---------------");
                 System.out.println("1) See list of interactions");
-                System.out.println("2) Add an interaction");
-                System.out.println("3) Delete an interaction");
-                System.out.println("4) Update an interaction");
-                System.out.println("5) Return to the main menu");
+                System.out.println("2) See the interaction of given ID");
+                System.out.println("3) Add an interaction");
+                System.out.println("4) Delete an interaction");
+                System.out.println("5) Update an interaction");
+                System.out.println("6) Return to the main menu");
                 System.out.println("----------------------------------------");
 
                 Scanner scanner = new Scanner(System.in);
 
                 // Check the input from users if it is valid
                 //int option = OptionCheck.optionCheck(1,5);
-                int option = OptionCheck.optionCheck(1,5);
+                int option = OptionCheck.optionCheck(1,6);
+                System.out.println();
 
                 // Depending on the option that the user choose, it will display the see list of all the interaction, adding an interaction, delete an interaction, update an interaction or return to the main menu
                 if (option == 1){
@@ -146,15 +157,20 @@ public class Main {
 
                 } else if (option == 2){
 
+                    // Call the function to the given interaction ID
+                    interactionManager.showEntry();
+
+                } else if (option == 3){
+
                     // Call the function to add an interaction
                     interactionManager.addEntry();
 
-                } else if (option == 3) {
+                } else if (option == 4) {
 
                     // Call the function to delete an given interaction
                     interactionManager.deleteEntry();
 
-                } else if (option == 4){
+                } else if (option == 5){
 
                     // Call the function to update an interaction
                     interactionManager.updateEntry();
