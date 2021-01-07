@@ -44,8 +44,7 @@ public class DateManager {
                 resultDate = inputScanner.next();
             }
             while (!isCorrectDateFormat(resultDate, this.dateFormat) || resultDate == null);
-        }catch (ParseException e){
-            System.out.println("Incorrect date format, please try again.");
+        }catch (ParseException ignored){
         }
         return resultDate;
     }

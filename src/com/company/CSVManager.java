@@ -33,7 +33,7 @@ public abstract class CSVManager {
          */
         String lastLine = "";
         String currentLine = "";
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("leads.csv"));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(this.fileName));
 
         // check for empty file
         if (bufferedReader.readLine() == null){

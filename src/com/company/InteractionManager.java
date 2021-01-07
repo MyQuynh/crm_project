@@ -25,13 +25,14 @@ public class InteractionManager extends CSVManager{
         String[] allowedResult = new String[]{"neutral", "positive", "negative"};
 
         String interId = "inter_";
+        this.latestId += 1;
         if (this.latestId >= 100) {
             interId += this.latestId;
         } else {
             String prefix = Math.log(100) / Math.log(100 - this.latestId) >= 1 ? "0" : "00";
             interId += prefix + this.latestId;
         }
-        this.latestId += 1;
+
 
         do {
             System.out.println("Enter interaction's date: ");
@@ -67,6 +68,7 @@ public class InteractionManager extends CSVManager{
                 FileWriter fileWriter = new FileWriter(this.fileName, true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         ) {
+            bufferedWriter.write("\n");
             bufferedWriter.write(newLine);
         } catch (IOException ioException) {
             ioException.printStackTrace();
