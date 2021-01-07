@@ -102,7 +102,7 @@ public class IsValid {
     public String isValidPhoneNumber(){
 
         // Creating the valid pattern Vietnam phone number (which has 10 digits) using RegEx
-        Pattern patternPhone = Pattern.compile("^[0-9]{10}$");
+        Pattern patternPhone = Pattern.compile("^[0-9]{10,12}$");
 
         // Looping until the users meet the condition
         while (true){
@@ -120,7 +120,7 @@ public class IsValid {
                 System.out.println("Please try again");
             // If it not matches the following patter phone number, make the user enter again and notify them
             } else {
-                System.out.println("Invalid phone number");
+                System.out.println("Invalid phone number, the number should had the numbers of digit in range from 10 to 12");
                 System.out.println("Please try again");
             }
         }
@@ -183,6 +183,7 @@ public class IsValid {
         ArrayList<String> listLead = new ArrayList<>();
 
         try {
+            // Reading through the file
             FileReader fileWriter = new FileReader(new File("leads.csv"));
             Scanner scannerFile = new Scanner(fileWriter);
 

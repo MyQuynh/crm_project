@@ -1,4 +1,4 @@
-package finalproject;
+package finalproject.reportandstatistic;
 
 import java.io.IOException;
 import java.text.ParseException;

@@ -1,14 +1,17 @@
 package finalproject;
-
+import finalproject.reportandstatistic.ReportingAndStatistics;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class Main {
 
+    // Creating the global scanner so that preventing the No such Element Exception
     public static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args){
+
+        // Call the main menu
         mainMenu();
     }
 
@@ -56,6 +59,7 @@ public class Main {
 
     public static void leadMenu() {
 
+        // Looping through the lead menu util the condition meet
         while (true) {
             // Creat a class LeadManager to later call function
             try {
@@ -133,7 +137,7 @@ public class Main {
 
                 // Check the input from users if it is valid
                 //int option = OptionCheck.optionCheck(1,5);
-                int option = scanner.nextInt();
+                int option = OptionCheck.optionCheck(1,5);
 
                 // Depending on the option that the user choose, it will display the see list of all the interaction, adding an interaction, delete an interaction, update an interaction or return to the main menu
                 if (option == 1){
@@ -204,7 +208,7 @@ public class Main {
                     break;
                 }
             } catch (ParseException | IOException e) {
-                e.printStackTrace();
+                System.out.println("The file was caught the problems");;
             }
 
 

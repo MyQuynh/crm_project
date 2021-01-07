@@ -1,5 +1,6 @@
 package finalproject;
 
+import finalproject.leadinput.*;
 import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.File;
@@ -146,7 +147,7 @@ public class LeadManager extends CSVManager {
             System.out.printf("%1$18s", word[4]); // Get and print the phone number value
             System.out.printf("%1$25s", word[5]); // Get and print the email value
             System.out.printf("%1$25s", word[6]); // Get and print the address value
-            System.out.println(""); // Start from the next line
+            System.out.println(); // Start from the next line
         }
         System.out.println();
     }
@@ -173,15 +174,18 @@ public class LeadManager extends CSVManager {
         //leadName = isValid.isValidName();
 
         // Get the input name from the user and check if it valid
-        while(true){
-            leadName = inputScanner.nextLine();
-            if (isValid.checkNameValid(leadName)){
-                 break;
-            } else {
-                System.out.println("Invalid name");
-                System.out.println("Please try again");
-            }
-        }
+        LeadNameInput leadNameInput = new LeadNameInput();
+        leadName = leadNameInput.leadNameInput();
+
+//        while(true){
+//            leadName = inputScanner.nextLine();
+//            if (isValid.checkNameValid(leadName)){
+//                 break;
+//            } else {
+//                System.out.println("Invalid name");
+//                System.out.println("Please try again");
+//            }
+//        }
 
         do {
             System.out.println("Enter lead's dob: ");
@@ -194,7 +198,9 @@ public class LeadManager extends CSVManager {
 //        } while (leadGender.isBlank() || !contains(allowedGender, leadGender));
 
         // Get the input gender and check if it valid
-        leadGender = isValid.isValidGender();
+        LeadGenderInput leadGenderInput = new LeadGenderInput();
+        leadGender = leadGenderInput.leadGenderInput();
+        //leadGender = isValid.isValidGender();
 
 
 //        do {
@@ -203,7 +209,9 @@ public class LeadManager extends CSVManager {
 //        } while (leadPhone.isBlank());
 
         // Get the input phone number and check if it valid
-        leadPhone = isValid.isValidPhoneNumber();
+        LeadPhoneNumberInput leadPhoneNumberInput = new LeadPhoneNumberInput();
+        leadPhone = leadPhoneNumberInput.leadPhoneNumberInput();
+        //leadPhone = isValid.isValidPhoneNumber();
 
 //        do {
 //            System.out.println("Enter lead's email: ");
@@ -211,7 +219,9 @@ public class LeadManager extends CSVManager {
 //        } while (leadMail.isBlank() || !isValid.isValidEmail(leadMail));
 
         // Get the input email from the user and check the validation
-        leadMail = isValid.isValidEmail();
+        LeadEmailInput leadEmailInput = new LeadEmailInput();
+        leadMail = leadEmailInput.leadEmailInput();
+        //leadMail = isValid.isValidEmail();
 
 //        do {
 //            System.out.println("Enter lead's address: ");
@@ -219,7 +229,9 @@ public class LeadManager extends CSVManager {
 //        } while (leadAddress.isBlank());
 
         // Get the input address from the user and check if it is valid
-        leadAddress = isValid.isValidAddress();
+        LeadAddressInput leadAddressInput = new LeadAddressInput();
+        leadAddress = leadAddressInput.leadAddressInput();
+        //leadAddress = isValid.isValidAddress();
 
         return String.join(",", leadId, leadName, leadDob, String.valueOf(leadGender), leadPhone, leadMail, leadAddress);
     }

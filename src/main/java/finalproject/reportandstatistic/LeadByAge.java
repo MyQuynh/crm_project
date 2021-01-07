@@ -1,4 +1,4 @@
-package finalproject;
+package finalproject.reportandstatistic;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -54,7 +54,7 @@ public class LeadByAge {
                 }
 
             } else {
-                System.out.println("Nono");
+                System.out.println("Not match, please try again");
             }
         }
 
@@ -64,8 +64,6 @@ public class LeadByAge {
         System.out.println("| " + String.format("%1$18s", "0-10(years old)") + " | " + String.format("%1$18s", "10-20(years old)") + " | " + String.format("%1$18s", "20-60(years old)") + " | " + String.format("%1$18s", "over 60(years old)") + " |");
         System.out.println("| " + String.format("%1$18d", count0_10) + " | " + String.format("%1$18d", count10_20) + " | " + String.format("%1$18d", count20_60) + " | " + String.format("%1$18d", countHigher60) + " |");
         System.out.println();
-
-
 
     }
 }

@@ -143,7 +143,8 @@ public abstract class CSVManager{
 
     public void showEntry() throws IOException {
         //Scanner entryIdScanner = new Scanner(System.in);
-        System.out.println("Enter the id of the entry: ");
+        // TODO: The input not keeping looping to ask the users
+        System.out.print("Enter the id of the entry: ");
         String entryId = Main.scanner.next();
         boolean found = false;
 
@@ -157,7 +158,8 @@ public abstract class CSVManager{
             }
         }
         if (!found) {
-            System.out.println("no matching lead id found");
+            System.out.println("No matching id found");
+            showEntry();
         }
 
         //entryIdScanner.close();

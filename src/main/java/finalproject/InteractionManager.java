@@ -1,5 +1,8 @@
 package finalproject;
 import finalproject.CSVManager;
+import finalproject.interactioninput.InteractionLeadIDExistInput;
+import finalproject.interactioninput.InteractionMethodInput;
+import finalproject.interactioninput.InteractionPotentialInput;
 import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.File;
@@ -141,17 +144,23 @@ public class InteractionManager extends CSVManager {
         } while (interactionDate.isBlank() || !dateManager.isCorrectDateFormat(interactionDate));
 
         // Check if the leadID is exist, if does return the LeadID, if don't, make the user enter again
-        leadId = isValid.isExistLeadID();
+        InteractionLeadIDExistInput interactionLeadIDExistInput = new InteractionLeadIDExistInput();
+        leadId = interactionLeadIDExistInput.leadIDExistInput();
+        //leadId = isValid.isExistLeadID();
 
-        do {
-            System.out.println("Enter interaction's communication method: ");
-            communicationMethod = inputScanner.next(); // TODO: Can we make is lowercase
-        } while (communicationMethod.isBlank() || !contains(allowedCommunicationMethod, communicationMethod));
+//        do {
+//            System.out.println("Enter interaction's communication method: ");
+//            communicationMethod = inputScanner.next(); // TODO: Can we make is lowercase
+//        } while (communicationMethod.isBlank() || !contains(allowedCommunicationMethod, communicationMethod));
+        InteractionMethodInput interactionMethodInput = new InteractionMethodInput();
+        communicationMethod = interactionMethodInput.interactionMethodInput();
 
-        do {
-            System.out.println("Enter interaction's result: ");
-            result = inputScanner.next();
-        } while (result.isBlank() || !contains(allowedResult, result));
+//        do {
+//            System.out.println("Enter interaction's result: ");
+//            result = inputScanner.next();
+//        } while (result.isBlank() || !contains(allowedResult, result));
+        InteractionPotentialInput interactionPotentialInput = new InteractionPotentialInput();
+        result = interactionPotentialInput.inputPotentialFromInteraction();
 
         return String.join(",", inter_id, interactionDate, leadId, communicationMethod, result);
     }
