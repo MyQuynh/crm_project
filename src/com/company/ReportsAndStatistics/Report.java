@@ -9,7 +9,7 @@ public class Report {
     InteractPotential interactPotential = new InteractPotential();
     NumberOfInteractor numberOfInteractor = new NumberOfInteractor();
 
-    public void getleadByAge() throws FileNotFoundException, ParseException {
+    public void getLeadByAge() throws FileNotFoundException, ParseException {
         leadByAge.getDateByAge();
     };
 

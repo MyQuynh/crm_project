@@ -108,7 +108,7 @@ public class Main {
             userChoice = scanner.nextInt();
         } while (1 > userChoice || userChoice > 5);
         if (userChoice == 1){
-            report.getleadByAge();
+            report.getLeadByAge();
             mainMenu();
         }
         else if (userChoice == 2){
