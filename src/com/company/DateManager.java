@@ -33,7 +33,7 @@ public class DateManager {
     }
 
 
-    public String getDateFromInput() throws ParseException {
+    public String getDateFromInput()throws ParseException {
         Scanner inputScanner = new Scanner(System.in);
         String resultDate = "";
 
@@ -43,21 +43,24 @@ public class DateManager {
                 System.out.println("Please enter date according to format entered above.");
                 resultDate = inputScanner.next();
             }
-            while (!isCorrectDateFormat(resultDate) || resultDate == null);
+            while (!isCorrectDateFormat(resultDate, this.dateFormat) || resultDate == null);
         }catch (ParseException e){
             System.out.println("Incorrect date format, please try again.");
         }
         return resultDate;
     }
 
-    public boolean isCorrectDateFormat(String date) throws ParseException {
+    public boolean isCorrectDateFormat(String date, String targetFormat) throws ParseException {
+        if (targetFormat.equals("")){
+            targetFormat = this.dateFormat;
+        }
         Date formattedDate = null;
         try {
-            DateFormat dateFormat = new SimpleDateFormat(this.dateFormat);
+            DateFormat dateFormat = new SimpleDateFormat(targetFormat);
             dateFormat.setLenient(false);
             formattedDate = dateFormat.parse(date);
         } catch (ParseException e) {
-            System.out.println("Incorrect date format. Please try again.");
+            System.out.println("\nWrong format. Please enter again\n");
             return false;
         }
         return true;

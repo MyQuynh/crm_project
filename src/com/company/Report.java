@@ -1,17 +1,30 @@
 package com.company;
 
-import java.util.Scanner;
+import java.io.IOException;
+import java.text.ParseException;
 
 public class Report {
 
-    public static void showLeadsByAge() {
+    public void leadByAge(){
+        try {
+            LeadByAge led = new LeadByAge();
+            led.LeadByAge();
+        } catch (ParseException | IOException e) {
+            System.out.println("Error");;
+        }
+
     }
 
-    public static void showInteractionByPotential(String startDate, String endDate) {
-
+    // Interaction potential
+    public void interactionPotential() throws IOException, ParseException {
+        PotentialInteract poi = new PotentialInteract();
+        poi.PotentialInteract();
     }
 
-    public static void showInteractionByMonth(String startDate, String endDate) {
-
+    // Numbers of interaction
+    public void numberOfInteraction() throws IOException, ParseException {
+        NumberOfInteractor noi = new NumberOfInteractor();
+        noi.NumberOfInteractor();
     }
+
 }

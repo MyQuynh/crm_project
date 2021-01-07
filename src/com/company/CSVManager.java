@@ -7,13 +7,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class CSVReader {
+public abstract class CSVManager {
     protected String fileName;
 
-    public CSVReader(String filename){
+    public CSVManager(String filename){
         this.fileName = filename;
     }
 
@@ -27,6 +28,9 @@ public class CSVReader {
     }
 
     public int getLatestId() throws IOException {
+        /*
+        Get the latest id used in file
+         */
         String lastLine = "";
         String currentLine = "";
         BufferedReader bufferedReader = new BufferedReader(new FileReader("leads.csv"));
@@ -103,4 +107,8 @@ public class CSVReader {
             System.out.println(Arrays.toString(lineContent));
         }
     }
+
+    public void addEntry() throws ParseException {}
+
+    public void updateEntry() throws FileNotFoundException, ParseException {}
 }
