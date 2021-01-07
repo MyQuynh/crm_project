@@ -1,6 +1,8 @@
-package com.company;
+package com.company.ReportsAndStatistics;
+
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -10,9 +12,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class NumberOfInteractor {
 
-    public void NumberOfInteractor() throws ParseException, IOException {
+    public void getNumberOfInteractor() throws IOException, ParseException {
         BufferedReader file = new BufferedReader(new FileReader("interactions.csv"));
         String line;
         Pattern p = Pattern.compile("(.+?),(.+?),(.+?),(.+?),(.+?)");
@@ -97,6 +100,5 @@ public class NumberOfInteractor {
             }
         }
         System.out.println("\n");
-
     }
 }

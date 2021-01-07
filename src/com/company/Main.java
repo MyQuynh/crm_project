@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.ReportsAndStatistics.Report;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -106,15 +108,15 @@ public class Main {
             userChoice = scanner.nextInt();
         } while (1 > userChoice || userChoice > 5);
         if (userChoice == 1){
-            report.leadByAge();
+            report.getleadByAge();
             mainMenu();
         }
         else if (userChoice == 2){
-            report.interactionPotential();
+            report.getInteractionPotential();
             mainMenu();
         }
         else if (userChoice == 3){
-            report.numberOfInteraction();
+            report.getNumberOfInteraction();
             mainMenu();
         }
         else if (userChoice == 4){
