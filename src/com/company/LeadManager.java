@@ -23,9 +23,14 @@ public class LeadManager extends CSVManager{
         String[] allowedResult = new String[]{"neutral", "positive", "negative"};
         String[] allowedGender = new String[]{"true", "false"};
 
-        String leadId = "lead_" + this.latestId;
+        String leadId = "lead_";
         this.latestId += 1;
-
+        if (this.latestId >= 100) {
+            leadId += this.latestId;
+        } else {
+            String prefix = Math.log(100) / Math.log(100 - this.latestId) >= 1 ? "0" : "00";
+            leadId += prefix + this.latestId;
+        }
         do {
             System.out.println("Enter lead's name: ");
             leadName = inputScanner.next();
