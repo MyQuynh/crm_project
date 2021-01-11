@@ -195,28 +195,28 @@ public class Main {
             // Display the menu bar of Report and Statistic
             System.out.println("----------------REPORT_MENU--------------");
             System.out.println("1) Display a summary report that contains all number of leads by ages");
-            System.out.println("2) Display a summary report that contains all number of interactions by potential");
-            System.out.println("3) Display a summary report that contains all number of interactions by month");
+            System.out.println("2) Display a summary report that contains all number of interactions by month");
+            System.out.println("3) Display a summary report that contains all number of interactions by potential");
             System.out.println("4) Return to the main menu");
             System.out.println("----------------------------------------");
 
             // Check the option if it valid
             int option = OptionCheck.optionCheck(1, 4);
             try {
-                // Depend on the option, the user can choose: see all the list of leads, adding lead, delete lead, update lead or return to the main menu
+                // Depend on the option, the user can choose: Display a summary report that contains all number of leads by ages, Display a summary report that contains all number of interactions by potential, Display a summary report that contains all number of interactions by month or return to the main menu
                 if (option == 1) {
 
-                    // Call the function showing all the leads
+                    // Call the function to display the lead by age
                     reportingAndStatistics.leadByAge();
 
                 } else if (option == 2) {
 
-                    // Call the function adding the Lead
+                    // Call the function display the number of potential by month
                     reportingAndStatistics.numberOfInteraction();
 
                 } else if (option == 3) {
 
-                    // Call the function delete the lead
+                    // Call the function to display the number of interaction by potential
                     reportingAndStatistics.interactionPotential();
 
                 } else {

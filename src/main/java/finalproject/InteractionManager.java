@@ -167,7 +167,7 @@ public class InteractionManager extends CSVManager {
         do {
             System.out.println("Enter interaction's date: ");
             interactionDate = dateManager.getDateFromInput();
-        } while (interactionDate.isBlank() || !dateManager.isCorrectDateFormat(interactionDate));
+        } while (interactionDate.isBlank() || !dateManager.isCorrectDateFormat(interactionDate,""));
         interactionDate = dateManager.convertDateFormat(interactionDate,"yyyy-MM-dd");
         System.out.println();
 
