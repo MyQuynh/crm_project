@@ -202,29 +202,25 @@ public class Main {
 
             // Check the option if it valid
             int option = OptionCheck.optionCheck(1, 4);
-            try {
-                // Depend on the option, the user can choose: Display a summary report that contains all number of leads by ages, Display a summary report that contains all number of interactions by potential, Display a summary report that contains all number of interactions by month or return to the main menu
-                if (option == 1) {
+            // Depend on the option, the user can choose: Display a summary report that contains all number of leads by ages, Display a summary report that contains all number of interactions by potential, Display a summary report that contains all number of interactions by month or return to the main menu
+            if (option == 1) {
 
-                    // Call the function to display the lead by age
-                    reportingAndStatistics.leadByAge();
+                // Call the function to display the lead by age
+                reportingAndStatistics.leadByAge();
 
-                } else if (option == 2) {
+            } else if (option == 2) {
 
-                    // Call the function display the number of potential by month
-                    reportingAndStatistics.numberOfInteraction();
+                // Call the function display the number of potential by month
+                reportingAndStatistics.numberOfInteraction();
 
-                } else if (option == 3) {
+            } else if (option == 3) {
 
-                    // Call the function to display the number of interaction by potential
-                    reportingAndStatistics.interactionPotential();
+                // Call the function to display the number of interaction by potential
+                reportingAndStatistics.interactionPotential();
 
-                } else {
-                    // Return to the main menu
-                    break;
-                }
-            } catch (ParseException | IOException e) {
-                System.out.println("The file was caught the problems");;
+            } else {
+                // Return to the main menu
+                break;
             }
 
 

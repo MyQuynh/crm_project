@@ -1,7 +1,6 @@
 package finalproject;
 
 import finalproject.leadinput.*;
-import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -238,7 +237,7 @@ public class LeadManager extends CSVManager {
             System.out.println("Enter lead's dob: ");
             leadDob = dateManager.getDateFromInput();
             //leadDob = dateManager.convertDateFormat(leadDob,"yyyy-MM-dd");
-        } while (leadDob.isBlank() || !dateManager.isCorrectDateFormat(leadDob,""));
+        } while (leadDob.isBlank() || dateManager.isCorrectDateFormat(leadDob, ""));
         leadDob = dateManager.convertDateFormat(leadDob,"yyyy-MM-dd");
         System.out.println();
 

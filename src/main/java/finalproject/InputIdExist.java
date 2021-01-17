@@ -36,7 +36,7 @@ public class InputIdExist {
             // Get the input from users
             System.out.println("Available list of ID:");
             System.out.println(Arrays.toString(listID.toArray()));
-            System.out.print("Enter the valuable ID from the list above: ");
+            System.out.print("Enter the available ID from the list above: ");
             String leadID = Main.scanner.nextLine();
 
             // If the input is empty, make the user enter again

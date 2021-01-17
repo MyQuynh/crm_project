@@ -147,7 +147,7 @@ public abstract class CSVManager{
             temp.deleteOnExit();
         } while (repeatable.repeat());
         System.out.println("Ending the delete entry ");
-        System.out.println("Heading to back...");
+        System.out.println("Heading back...");
 
     }
 
@@ -156,11 +156,13 @@ public abstract class CSVManager{
 
     public void showEntry() throws IOException {
         //Scanner entryIdScanner = new Scanner(System.in);
+        InputIdExist inputIdExist = new InputIdExist();
         Repeatable repeatable = new Repeatable();
         do {
-            System.out.print("Enter the id of the entry: ");
-            String entryId = Main.scanner.next();
-            boolean found = false;
+            //System.out.print("Enter the id of the entry: ");
+            //String entryId = Main.scanner.nextLine();
+            String entryId = inputIdExist.inputIdExist(new File(this.fileName));
+            //boolean found = false;
 
             Scanner fileScanner = new Scanner(new File(this.fileName));
             while (fileScanner.hasNext()) {
@@ -168,14 +170,14 @@ public abstract class CSVManager{
                 String[] lineContent = line.split(",");
                 if (lineContent[0].equals(entryId)) {
                     System.out.println(Arrays.toString(lineContent));
-                    found = true;
+                    //found = true;
                 }
             }
             fileScanner.close();
-            if (!found) {
-                System.out.println("No matching id found");
-                showEntry();
-            }
+//            if (!found) {
+//                System.out.println("No matching id found");
+//                showEntry();
+//            }
         } while (repeatable.repeat());
 
         //entryIdScanner.close();
