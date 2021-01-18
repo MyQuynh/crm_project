@@ -59,10 +59,9 @@ public class DateManager {
             dateFormat.setLenient(false);
             formattedDate = dateFormat.parse(date);
         } catch (ParseException e) {
-            System.out.println("\nWrong format. Please enter again\n");
             return false;
         }
-        return true;
+        return formattedDate != null;
     }
 
     public boolean isInRange(String start, String end, String dateString) throws ParseException {

@@ -7,7 +7,7 @@ import java.text.ParseException;
 public class Report {
     LeadByAge leadByAge = new LeadByAge();
     InteractPotential interactPotential = new InteractPotential();
-    NumberOfInteractor numberOfInteractor = new NumberOfInteractor();
+    NumberOfInteractorByMonth numberOfInteractor = new NumberOfInteractorByMonth();
 
     public void getLeadByAge() throws FileNotFoundException, ParseException {
         leadByAge.getDateByAge();

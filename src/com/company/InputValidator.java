@@ -3,11 +3,10 @@ package com.company;
 import java.util.regex.Pattern;
 
 public class InputValidator {
-    // TODO: add regex patterns
-    private final String emailPattern = "";
-    private final String phonePattern = "";
-    private final String addressPattern = "";
-    private final String namePattern = "";
+    private final String emailPattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@\\..com$";
+    private final String phonePattern = "^[0-9]{10,12}$";
+    private final String addressPattern = "(\\d+\\/?\\d+) [a-zA-Z_]+( [a-zA-Z_]+)*";
+    private final String namePattern = "\\s+";
 
     private final String[] patternList =
             new String[]{this.emailPattern, this.phonePattern, this.addressPattern, this.namePattern};

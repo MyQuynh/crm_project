@@ -2,7 +2,6 @@ package com.company.ReportsAndStatistics;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -13,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class NumberOfInteractor {
+public class NumberOfInteractorByMonth {
 
     public void getNumberOfInteractor() throws IOException, ParseException {
         BufferedReader file = new BufferedReader(new FileReader("interactions.csv"));

@@ -1,12 +1,6 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -14,13 +8,13 @@ import java.util.Scanner;
 public abstract class CSVManager {
     protected String fileName;
 
-    public CSVManager(String filename){
+    public CSVManager(String filename) {
         this.fileName = filename;
     }
 
-    public static boolean contains(String[] stringArr, String key){
+    public static boolean contains(String[] stringArr, String key) {
         for (int i = 0; i < stringArr.length; i++) {
-            if (stringArr[i].equals(key)){
+            if (stringArr[i].equals(key)) {
                 return true;
             }
         }
@@ -34,18 +28,20 @@ public abstract class CSVManager {
         String lastLine = "";
         String currentLine = "";
         BufferedReader bufferedReader = new BufferedReader(new FileReader(this.fileName));
-
         // check for empty file
-        if (bufferedReader.readLine() == null){
+
+        currentLine = bufferedReader.readLine();
+        if (currentLine == null){
             return 0;
         }
-
-        while ((currentLine = bufferedReader.readLine()) != null) {
-            lastLine = currentLine;
+        while (currentLine != null) {
+            if (!currentLine.isBlank()) {
+                lastLine = currentLine;
+            }
+            currentLine = bufferedReader.readLine();
         }
-        String id = lastLine.split(",")[0];
 
-        bufferedReader.close();
+        String id = lastLine.split(",")[0];
         return Integer.parseInt(id.substring(id.length() - 3));
     }
 
@@ -71,8 +67,6 @@ public abstract class CSVManager {
         if (currentFile.delete() && temp.renameTo(currentFile)) {
             System.out.println("Entry deleted");
         }
-
-        scanner.close();
         fileScanner.close();
     }
 
@@ -108,7 +102,38 @@ public abstract class CSVManager {
         }
     }
 
-    public void addEntry() throws ParseException {}
+    public void addEntry() throws ParseException {
+    }
 
-    public void updateEntry() throws FileNotFoundException, ParseException {}
+    public void updateEntry() throws FileNotFoundException, ParseException {
+        File temp = new File("temp.csv");
+        File currentFile = new File(this.fileName);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the id of the entry to be updated: ");
+        String id = scanner.next();
+
+        Scanner fileScanner = new Scanner(currentFile);
+
+        while (fileScanner.hasNext()) {
+            String line = fileScanner.nextLine();
+            if (!line.split(",")[0].equals(id)) {
+                try (
+                        FileWriter fileWriter = new FileWriter(this.fileName);
+                        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                ) {
+                    addEntry();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            } else {
+                System.out.println("There's no matching entry with matching id.");
+            }
+
+            // delete current file
+            if (currentFile.delete() && temp.renameTo(currentFile)) {
+                System.out.println("entry updated");
+            }
+        }
+    }
 }

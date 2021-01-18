@@ -24,16 +24,20 @@ public class InteractionManager extends CSVManager{
         String[] allowedCommunicationMethod = new String[]{"email", "phone"};
         String[] allowedResult = new String[]{"neutral", "positive", "negative"};
 
+        // INCREMENT AND SET INTERACTION ID
         String interId = "inter_";
+        System.out.println("latest id: " + this.latestId);
         this.latestId += 1;
         if (this.latestId >= 100) {
             interId += this.latestId;
         } else {
-            String prefix = Math.log(100) / Math.log(100 - this.latestId) >= 1 ? "0" : "00";
+            // APPEND 1 ZERO IF LATEST ID HAS TWO DIGITS, OR APPEND 2 IF IT HAS ONE DIGIT
+            String prefix = Math.log(this.latestId) / Math.log(10) >= 1 ? "0" : "00";
+            System.out.println("inter prefix: " + prefix);
             interId += prefix + this.latestId;
         }
 
-
+        // GET INTERACTION'S INFO FROM INPUT
         do {
             System.out.println("Enter interaction's date: ");
             interactionDate = dateManager.getDateFromInput();
@@ -63,13 +67,14 @@ public class InteractionManager extends CSVManager{
         } while (result.isBlank()
                 || !contains(allowedResult, result));
 
+        // WRITE USER INPUT TO FILE
         String newLine = String.join(",", interId, interactionDate, leadId, communicationMethod, result);
         try (
                 FileWriter fileWriter = new FileWriter(this.fileName, true);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         ) {
-            bufferedWriter.write("\n");
             bufferedWriter.write(newLine);
+            bufferedWriter.write("\n");
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -85,6 +90,7 @@ public class InteractionManager extends CSVManager{
 
         Scanner fileScanner = new Scanner(currentFile);
 
+        // GET INTERACTION'S NEW INFO FROM USER INPUT
         while (fileScanner.hasNext()) {
             String line = fileScanner.nextLine();
             if (!line.split(",")[0].equals(id)) {

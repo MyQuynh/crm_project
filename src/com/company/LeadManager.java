@@ -8,11 +8,13 @@ public class LeadManager extends CSVManager{
 
     private int latestId;
     private final DateManager dateManager;
+    private final InputValidator inputValidator;
 
     public LeadManager() throws IOException {
         super("leads.csv");
         this.latestId = getLatestId();
         dateManager = new DateManager();
+        inputValidator = new InputValidator();
     }
 
     public void addEntry() throws ParseException {
@@ -28,13 +30,13 @@ public class LeadManager extends CSVManager{
         if (this.latestId >= 100) {
             leadId += this.latestId;
         } else {
-            String prefix = Math.log(100) / Math.log(100 - this.latestId) >= 1 ? "0" : "00";
+            String prefix = Math.log(this.latestId) / Math.log(10) >= 1 ? "0" : "00";
             leadId += prefix + this.latestId;
         }
         do {
             System.out.println("Enter lead's name: ");
             leadName = inputScanner.next();
-        } while (leadName.isBlank());
+        } while (leadName.isBlank() || inputValidator.isValidPattern(leadName, 3));
 
         do {
             System.out.println("Enter lead's dob: ");
@@ -53,17 +55,17 @@ public class LeadManager extends CSVManager{
         do {
             System.out.println("Enter lead's phone number: ");
             leadPhone = inputScanner.next();
-        } while (leadPhone.isBlank());
+        } while (leadPhone.isBlank() || inputValidator.isValidPattern(leadPhone, 1));
 
         do {
             System.out.println("Enter lead's email: ");
             leadMail = inputScanner.next();
-        } while (leadMail.isBlank() || !leadMail.contains("@"));
+        } while (leadMail.isBlank() || inputValidator.isValidPattern(leadMail, 0));
 
         do {
             System.out.println("Enter lead's address: ");
             leadAddress = inputScanner.next();
-        } while (leadAddress.isBlank());
+        } while (leadAddress.isBlank() || inputValidator.isValidPattern(leadAddress, 2));
 
         String newLine = String.join(",", leadId, leadName, leadDob, leadGender, leadPhone, leadMail, leadAddress);
         try (
@@ -76,35 +78,5 @@ public class LeadManager extends CSVManager{
         }
     }
 
-    public void updateEntry() throws FileNotFoundException, ParseException {
-        File temp = new File("temp.csv");
-        File currentFile = new File(this.fileName);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the id of the entry to be updated: ");
-        String id = scanner.next();
-
-        Scanner fileScanner = new Scanner(currentFile);
-
-        while (fileScanner.hasNext()) {
-            String line = fileScanner.nextLine();
-            if (!line.split(",")[0].equals(id)) {
-                try (
-                        FileWriter fileWriter = new FileWriter(this.fileName);
-                        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                ) {
-                    addEntry();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            } else {
-                System.out.println("There's no matching entry with matching id.");
-            }
-
-            // delete current file
-            if (currentFile.delete() && temp.renameTo(currentFile)) {
-                System.out.println("entry updated");
-            }
-        }
-    }
 }
