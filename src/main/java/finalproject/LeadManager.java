@@ -100,21 +100,6 @@ public class LeadManager extends CSVManager {
         this.leadAddress = leadAddress;
     }
 
-//    @Override
-//    public String getFileName() {
-//        return fileName;
-//    }
-//
-//    @Override
-//    public void setFileName(String fileName) {
-//        this.fileName = fileName;
-//    }
-
-    @Override
-    public int getLatestId() {
-        return latestId;
-    }
-
     public void setLatestId(int latestId) {
         this.latestId = latestId;
     }
@@ -155,10 +140,7 @@ public class LeadManager extends CSVManager {
     public void addEntry() throws IOException {
         // TODO: add date from string
 
-//        int latestId = this.getLatestId();
-//        System.out.println(latestId);
-//        String id = "lead_" + latestId;
-//        System.out.println("latest id: " + id);
+
         Repeatable repeatable = new Repeatable();
 
         do {
@@ -169,6 +151,7 @@ public class LeadManager extends CSVManager {
             if (this.latestId >= 100) {
                 leadId += this.latestId;
             } else {
+                // ADD APPROPRIATE AMOUNT OF PREFIX 0s IF ID < 100
                 String prefix = Math.log(100) / Math.log(100 - this.latestId) >= 1 ? "0" : "00";
                 leadId += prefix + this.latestId;
             }
@@ -197,97 +180,42 @@ public class LeadManager extends CSVManager {
 
     @Override
     public String addEntryFromInput() throws ParseException {
-        //Scanner inputScanner = new Scanner(System.in);
-        //IsValid isValid = new IsValid();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String leadName, leadDob, leadPhone, leadMail, leadAddress;
         boolean leadGender;
-
-        String[] allowedCommunicationMethod = new String[]{"email", "phone"};
-        String[] allowedResult = new String[]{"neutral", "positive", "negative"};
-        String[] allowedGender = new String[]{"true", "false"};
-
-
-
-
-
-//        do {
-//            System.out.println("Enter lead's name: ");
-//            leadName = inputScanner.next();
-//        } while (leadName.isBlank());
-        //System.out.println("Enter lead's name: ");
-        //leadName = isValid.isValidName();
 
         // Get the input name from the user and check if it valid
         LeadNameInput leadNameInput = new LeadNameInput();
         leadName = leadNameInput.leadNameInput();
         System.out.println();
 
-//        while(true){
-//            leadName = inputScanner.nextLine();
-//            if (isValid.checkNameValid(leadName)){
-//                 break;
-//            } else {
-//                System.out.println("Invalid name");
-//                System.out.println("Please try again");
-//            }
-//        }
-
         do {
             System.out.println("Enter lead's dob: ");
             leadDob = dateManager.getDateFromInput();
             //leadDob = dateManager.convertDateFormat(leadDob,"yyyy-MM-dd");
-        } while (leadDob.isBlank() || dateManager.isCorrectDateFormat(leadDob, ""));
+        } while (leadDob.isBlank() || !dateManager.isCorrectDateFormat(leadDob, ""));
         leadDob = dateManager.convertDateFormat(leadDob,"yyyy-MM-dd");
         System.out.println();
-
-//        do {
-//            System.out.println("Enter lead's gender: (true for male and false for female)");
-//            leadGender = inputScanner.next();
-//        } while (leadGender.isBlank() || !contains(allowedGender, leadGender));
 
         // Get the input gender and check if it valid
         LeadGenderInput leadGenderInput = new LeadGenderInput();
         leadGender = leadGenderInput.leadGenderInput();
         System.out.println();
-        //leadGender = isValid.isValidGender();
-
-
-//        do {
-//            System.out.println("Enter lead's phone number: ");
-//            leadPhone = inputScanner.next();
-//        } while (leadPhone.isBlank());
 
         // Get the input phone number and check if it valid
         LeadPhoneNumberInput leadPhoneNumberInput = new LeadPhoneNumberInput();
         leadPhone = leadPhoneNumberInput.leadPhoneNumberInput();
         System.out.println();
-        //leadPhone = isValid.isValidPhoneNumber();
-
-//        do {
-//            System.out.println("Enter lead's email: ");
-//            leadMail = inputScanner.next();
-//        } while (leadMail.isBlank() || !isValid.isValidEmail(leadMail));
 
         // Get the input email from the user and check the validation
         LeadEmailInput leadEmailInput = new LeadEmailInput();
         leadMail = leadEmailInput.leadEmailInput();
         System.out.println();
-        //leadMail = isValid.isValidEmail();
-
-//        do {
-//            System.out.println("Enter lead's address: ");
-//            leadAddress = inputScanner.next();
-//        } while (leadAddress.isBlank());
 
         // Get the input address from the user and check if it is valid
         LeadAddressInput leadAddressInput = new LeadAddressInput();
         leadAddress = leadAddressInput.leadAddressInput();
         System.out.println();
-        //leadAddress = isValid.isValidAddress();
-        //System.out.println(this.getFileName());
-        //System.out.println(this.latestId);
-        //System.out.println(leadName +leadDob +String.valueOf(leadGender) + leadPhone + leadMail + leadAddress);
+
         return String.join(",", leadName, leadDob, String.valueOf(leadGender), leadPhone, leadMail, leadAddress);
     }
 

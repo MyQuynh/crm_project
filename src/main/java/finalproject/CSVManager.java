@@ -18,45 +18,12 @@ public abstract class CSVManager{
         this.fileName = fileName;
     }
 
-    public static boolean contains(String[] stringArr, String key){
-        for (int i = 0; i < stringArr.length; i++) {
-            if (stringArr[i].equals(key)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public int getLatestId() throws IOException {
-        /*
-        Get the latest id used in file
-         */
-        String lastLine = "";
-        String currentLine = "";
-        //BufferedReader bufferedReader = new BufferedReader(new FileReader("leads.csv"));
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(this.fileName));
-
-        // check for empty file
-        if (bufferedReader.readLine() == null){
-            System.out.println("Not found");
-            return 0;
-        }
-        while ((currentLine = bufferedReader.readLine()) != null) {
-            lastLine = currentLine;
-        }
-        System.out.println(lastLine);
-        String id = (lastLine.split(","))[0];
-        bufferedReader.close();
-        return Integer.parseInt(id.substring(id.length() - 3));
-    }
-
     public int getLatestIdTest() throws IOException {
         /*
         Get the latest id used in file
          */
         String lastLine = "";
         String currentLine = "";
-        //BufferedReader bufferedReader = new BufferedReader(new FileReader("leads.csv"));
         BufferedReader bufferedReader = new BufferedReader(new FileReader(this.fileName));
 
         // check for empty file
@@ -83,7 +50,6 @@ public abstract class CSVManager{
 
         PrintWriter tempWriter = new PrintWriter(new FileWriter(temp));
 
-        // Scanner scanner = new Scanner(System.in);
         //System.out.println("Enter the id of the entry to be updated: ");
         String id = inputIdExist.inputIdExist(new File(this.fileName));
         String lineChanging = "";
@@ -159,10 +125,7 @@ public abstract class CSVManager{
         InputIdExist inputIdExist = new InputIdExist();
         Repeatable repeatable = new Repeatable();
         do {
-            //System.out.print("Enter the id of the entry: ");
-            //String entryId = Main.scanner.nextLine();
             String entryId = inputIdExist.inputIdExist(new File(this.fileName));
-            //boolean found = false;
 
             Scanner fileScanner = new Scanner(new File(this.fileName));
             while (fileScanner.hasNext()) {
@@ -174,13 +137,8 @@ public abstract class CSVManager{
                 }
             }
             fileScanner.close();
-//            if (!found) {
-//                System.out.println("No matching id found");
-//                showEntry();
-//            }
-        } while (repeatable.repeat());
 
-        //entryIdScanner.close();
+        } while (repeatable.repeat());
     }
 
     public void showAllEntries() throws FileNotFoundException {

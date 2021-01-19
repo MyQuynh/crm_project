@@ -31,7 +31,6 @@ public class InteractionManager extends CSVManager {
     public InteractionManager() throws IOException {
         super("interactions.csv");
         this.latestId = this.getLatestIdTest();
-        //dateManager = new DateManager();
     }
 
     public String getInteractionID() {
@@ -76,19 +75,6 @@ public class InteractionManager extends CSVManager {
 
 
     @Override
-    public int getLatestId() {
-        return latestId;
-    }
-
-    public void setLatestId(int latestId) {
-        this.latestId = latestId;
-    }
-
-    public DateManager getDateManager() {
-        return dateManager;
-    }
-
-    @Override
     public void showAllEntries() throws FileNotFoundException {
         Scanner fileScanner = new Scanner(new File("interactions.csv"));
         System.out.println();
@@ -126,6 +112,7 @@ public class InteractionManager extends CSVManager {
             if (this.latestId >= 100) {
                 interactionId += this.latestId;
             } else {
+                // ADD APPROPRIATE AMOUNT OF PREFIX 0s IF ID < 100
                 String prefix = Math.log(100) / Math.log(100 - this.latestId) >= 1 ? "0" : "00";
                 interactionId += prefix + this.latestId;
             }
@@ -154,18 +141,13 @@ public class InteractionManager extends CSVManager {
 
     @Override
     public String addEntryFromInput() throws ParseException {
-        Scanner inputScanner = new Scanner(System.in);
         String interactionDate, leadId, communicationMethod, result;
-        IsValid isValid = new IsValid();
-
-        String[] allowedCommunicationMethod = new String[]{"email", "phone"};
-        String[] allowedResult = new String[]{"neutral", "positive", "negative"};
 
 
         do {
             System.out.println("Enter interaction's date: ");
             interactionDate = dateManager.getDateFromInput();
-        } while (interactionDate.isBlank() || dateManager.isCorrectDateFormat(interactionDate, ""));
+        } while (interactionDate.isBlank() || !dateManager.isCorrectDateFormat(interactionDate, ""));
         interactionDate = dateManager.convertDateFormat(interactionDate,"yyyy-MM-dd");
         System.out.println();
 
@@ -173,20 +155,11 @@ public class InteractionManager extends CSVManager {
         InteractionLeadIDExistInput interactionLeadIDExistInput = new InteractionLeadIDExistInput();
         leadId = interactionLeadIDExistInput.leadIDExistInput();
         System.out.println();
-        //leadId = isValid.isExistLeadID();
 
-//        do {
-//            System.out.println("Enter interaction's communication method: ");
-//            communicationMethod = inputScanner.next(); // TODO: Can we make is lowercase
-//        } while (communicationMethod.isBlank() || !contains(allowedCommunicationMethod, communicationMethod));
         InteractionMethodInput interactionMethodInput = new InteractionMethodInput();
         communicationMethod = interactionMethodInput.interactionMethodInput();
         System.out.println();
 
-//        do {
-//            System.out.println("Enter interaction's result: ");
-//            result = inputScanner.next();
-//        } while (result.isBlank() || !contains(allowedResult, result));
         InteractionPotentialInput interactionPotentialInput = new InteractionPotentialInput();
         result = interactionPotentialInput.inputPotentialFromInteraction();
         System.out.println();
