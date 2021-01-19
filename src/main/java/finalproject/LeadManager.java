@@ -139,8 +139,6 @@ public class LeadManager extends CSVManager {
     @Override
     public void addEntry() throws IOException {
         // TODO: add date from string
-
-
         Repeatable repeatable = new Repeatable();
 
         do {

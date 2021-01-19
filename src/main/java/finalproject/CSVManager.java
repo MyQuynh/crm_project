@@ -89,10 +89,17 @@ public abstract class CSVManager{
             File currentFile = new File(this.fileName);
             PrintWriter tempWriter = new PrintWriter(new FileWriter(temp, true));
 
+            System.out.println("checkpoint1");
+
             String id = inputIdExist.inputIdExist(new File(this.fileName));
             String lineDelete = "";
 
+            System.out.println("checkpoint2");
+
             Scanner fileScanner = new Scanner(currentFile);
+
+            System.out.println("checkpoint3");
+
             while (fileScanner.hasNext()) {
                 String line = fileScanner.nextLine();
                 if (!line.split(",")[0].equals(id)) {
@@ -101,14 +108,19 @@ public abstract class CSVManager{
                     lineDelete = line;
                 }
             }
+            System.out.println("checkpoint4");
             tempWriter.close();
             fileScanner.close();
 
-            if (currentFile.delete() && temp.renameTo(currentFile)) {
-                System.out.println();
-                System.out.println("Entry deleted successfully");
-                System.out.println("Information delete: " + lineDelete);
-                System.out.println();
+            System.out.println("checkpoint5");
+            if (currentFile.delete()) {
+                System.out.println("checkpoint6");
+                if (temp.renameTo(currentFile)) {
+                    System.out.println();
+                    System.out.println("Entry deleted successfully");
+                    System.out.println("Information delete: " + lineDelete);
+                    System.out.println();
+                }
             }
             temp.deleteOnExit();
         } while (repeatable.repeat());
@@ -121,7 +133,6 @@ public abstract class CSVManager{
 
 
     public void showEntry() throws IOException {
-        //Scanner entryIdScanner = new Scanner(System.in);
         InputIdExist inputIdExist = new InputIdExist();
         Repeatable repeatable = new Repeatable();
         do {
@@ -133,7 +144,6 @@ public abstract class CSVManager{
                 String[] lineContent = line.split(",");
                 if (lineContent[0].equals(entryId)) {
                     System.out.println(Arrays.toString(lineContent));
-                    //found = true;
                 }
             }
             fileScanner.close();
@@ -149,6 +159,10 @@ public abstract class CSVManager{
             String[] lineContent = line.split(",");
             System.out.println(Arrays.toString(lineContent));
         }
-        fileScanner.close();
+        try {
+            fileScanner.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

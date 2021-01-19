@@ -19,7 +19,9 @@ public class DateManager {
     public DateManager() {}
 
     private void setDateFormat() {
-        Scanner inputScanner = new Scanner(System.in);
+        /*
+        set internal date format
+         */
         int userChoice;
 
         System.out.println("Please enter a number to choose the date format for your next input.");
@@ -38,6 +40,9 @@ public class DateManager {
 
 
     public String getDateFromInput()throws ParseException {
+        /*
+        return Date object from user input
+         */
         Scanner inputScanner = new Scanner(System.in);
         String resultDate = "";
 
@@ -54,6 +59,10 @@ public class DateManager {
     }
 
     public boolean isCorrectDateFormat(String date, String targetFormat) throws ParseException {
+        /*
+        return True if input date String follows the correct format
+         */
+
         if (targetFormat.equals("")){
             targetFormat = this.dateFormat;
         }
@@ -71,7 +80,6 @@ public class DateManager {
 
     public boolean isInRange(String start, String end, String dateString) throws ParseException {
         DateFormat dateFormat = new SimpleDateFormat(this.dateFormat);
-        //System.out.println(this.dateFormat);
         Date startDate = dateFormat.parse(start);
         Date endDate = dateFormat.parse(end);
         Date date = dateFormat.parse(dateString);
@@ -80,6 +88,9 @@ public class DateManager {
     }
 
     public String convertDateFormat(String inputDate, String newFormat) {
+        /*
+        convert date format
+         */
         String newDateString = "";
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(this.dateFormat);
@@ -95,6 +106,10 @@ public class DateManager {
     }
 
     public Date convertStringToDate(String inputDate) throws ParseException {
+        /*
+        return Date object from String
+         */
+
         SimpleDateFormat dateFormat = new SimpleDateFormat(this.dateFormat);
 
         return dateFormat.parse(inputDate);

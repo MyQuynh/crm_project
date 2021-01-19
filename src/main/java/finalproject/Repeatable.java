@@ -4,6 +4,9 @@ public class Repeatable implements Repeat {
 
     @Override
     public boolean repeat() {
+        /*
+        allow user to repeat previous action without return to menu
+         */
         while(true){
             System.out.print("\nDo you want to continue this action (Y/N): ");
             String input = Main.scanner.nextLine();

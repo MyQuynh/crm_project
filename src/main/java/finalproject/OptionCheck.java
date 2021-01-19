@@ -9,7 +9,9 @@ public class OptionCheck {
     }
 
     public static int optionCheck(int min, int max){
-
+        /*
+        ask user to repeat if input is not available, is empty, or contain illegal characters
+         */
         int option = 0;
 
         while (true) {

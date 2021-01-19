@@ -1,44 +1,42 @@
-finalproject/InputIdExist.java
- finalproject.InputIdExist
+finalproject/reportandstatistic/PotentialInteract.java
+ finalproject.reportandstatistic.PotentialInteract
+finalproject/leadinput/LeadAddressInput.java
+ finalproject.leadinput.LeadAddressInput
 finalproject/reportandstatistic/ReportingAndStatistics.java
  finalproject.reportandstatistic.ReportingAndStatistics
+finalproject/reportandstatistic/LeadByAge.java
+ finalproject.reportandstatistic.LeadByAge
+finalproject/reportandstatistic/NumberOfInteract.java
+ finalproject.reportandstatistic.NumberOfInteract
+finalproject/DateManager.java
+ finalproject.DateManager
+finalproject/interactioninput/InteractionMethodInput.java
+ finalproject.interactioninput.InteractionMethodInput
+finalproject/Repeat.java
+ finalproject.Repeat
+finalproject/InputIdExist.java
+ finalproject.InputIdExist
 finalproject/Repeatable.java
  finalproject.Repeatable
-finalproject/IsValid.java
- finalproject.IsValid
 finalproject/leadinput/LeadPhoneNumberInput.java
  finalproject.leadinput.LeadPhoneNumberInput
 finalproject/interactioninput/InteractionLeadIDExistInput.java
  finalproject.interactioninput.InteractionLeadIDExistInput
 finalproject/leadinput/LeadNameInput.java
  finalproject.leadinput.LeadNameInput
-finalproject/Repeat.java
- finalproject.Repeat
-finalproject/CSVManager.java
- finalproject.CSVManager
-finalproject/DateManager.java
- finalproject.DateManager
-finalproject/LeadManager.java
- finalproject.LeadManager
-finalproject/interactioninput/InteractionMethodInput.java
- finalproject.interactioninput.InteractionMethodInput
-finalproject/reportandstatistic/LeadByAge.java
- finalproject.reportandstatistic.LeadByAge
+finalproject/Main.java
+ finalproject.Main
+finalproject/OptionCheck.java
+ finalproject.OptionCheck
 finalproject/leadinput/LeadGenderInput.java
  finalproject.leadinput.LeadGenderInput
 finalproject/interactioninput/InteractionPotentialInput.java
  finalproject.interactioninput.InteractionPotentialInput
 finalproject/leadinput/LeadEmailInput.java
  finalproject.leadinput.LeadEmailInput
-finalproject/reportandstatistic/PotentialInteract.java
- finalproject.reportandstatistic.PotentialInteract
-finalproject/OptionCheck.java
- finalproject.OptionCheck
-finalproject/reportandstatistic/NumberOfInteract.java
- finalproject.reportandstatistic.NumberOfInteract
-finalproject/leadinput/LeadAddressInput.java
- finalproject.leadinput.LeadAddressInput
-finalproject/Main.java
- finalproject.Main
+finalproject/CSVManager.java
+ finalproject.CSVManager
 finalproject/InteractionManager.java
  finalproject.InteractionManager
+finalproject/LeadManager.java
+ finalproject.LeadManager

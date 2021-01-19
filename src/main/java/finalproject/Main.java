@@ -10,21 +10,8 @@ public class Main {
     public static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args){
-
         // Call the main menu
         mainMenu();
-//        try {
-//            LeadManager leadManager = new LeadManager();
-//            System.out.println(leadManager.getLatestIdTest());
-//            System.out.println(leadManager.getFileName());;
-//
-//            InteractionManager interactionManager = new InteractionManager();
-//            System.out.println(interactionManager.getLatestIdTest());
-//            System.out.println(interactionManager.getFileName());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
     }
 
     public static void mainMenu(){
@@ -104,7 +91,6 @@ public class Main {
 
                     // Call the function adding the Lead
                     leadManager.addEntry();
-
                 } else if (option == 4) {
 
                     // Call the function delete the lead
